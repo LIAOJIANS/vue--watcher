@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./Mvue.js"></script>
+    <script type="text/javascript" src="./complie.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{bar}}</p>
+        <p>{{foo.bar}}</p>
+        <p m-text="text"></p>
+        <button @click="btn">点我查看事件</button>
+        <input type="text" m-model="model" />
+        <p>{{model}}</p>
+        <div m-html="html"></div>
+        <div @mouseover="onmouseover" style="width: 100px;height: 100px;background: #000;"></div>
+        <input type="text" @key.enter="down">
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Mvue({
+          el: '#app',
+          data: {
+            bar: '我是你爸爸',
+            text: '成功啦',
+            model: '11',
+            foo: {
+              bar: '我送hi你耶耶耶'
+            },
+            html: '<button>html添加来的button</button>'
+          },
+          create() {
+            console.log('开始啦')
+            setTimeout(() => {
+              console.log(this)
+              this.data.bar = '啊杰是我儿子'
+            }, 1500)
+          },
+          methods: {
+
+            btn() {
+              console.log(this.bar)
+              console.log('点击事件完成')
+              this.bar = '真的嘛'
+            },
+
+            onmouseover() {
+              console.log('我移动啦')
+            },
+
+            down() {
+              console.log('按下了enter')
+            }
+          }
+        })
+        // vm.$data.bar = '啊杰是我儿子'
+        // vm.$data.foo.bar = '是吗'
+    </script>
+</body>
+</html>
